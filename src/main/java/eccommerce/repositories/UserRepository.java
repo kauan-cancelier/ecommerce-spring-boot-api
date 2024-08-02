@@ -1,6 +1,6 @@
-package repositories;
+package eccommerce.repositories;
 
-import models.User;
+import eccommerce.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

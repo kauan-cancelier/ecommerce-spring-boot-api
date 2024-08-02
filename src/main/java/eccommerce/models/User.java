@@ -1,4 +1,4 @@
-package models;
+package eccommerce.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
 

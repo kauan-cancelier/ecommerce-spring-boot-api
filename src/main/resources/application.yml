@@ -15,12 +15,11 @@ spring:
     open-in-view: true
 
   datasource:
-    url:
-    username:
-    password:
-    driver-class-name:
+    url: jdbc:postgresql://localhost:5432/ecommerce
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
     initialization-mode: always
-    #optional
     hikari:
       pool-name: HikariCP
       maximum-pool-size: 10

@@ -2,6 +2,7 @@ package eccommerce;
 
 import com.fasterxml.jackson.datatype.hibernate5.jakarta.Hibernate5JakartaModule;
 import eccommerce.models.*;
+import eccommerce.models.enums.ResidenceType;
 import eccommerce.services.*;
 import eccommerce.services.impl.ProductService;
 import eccommerce.services.impl.UserService;
@@ -88,8 +89,19 @@ public class Main {
                 shoppingCartItem.setShoppingCart(shoppingCart);
                 shoppingCartItem.setProduct(p);
                 cartItemService.save(shoppingCartItem);
-
             }
+
+            Address address = new Address();
+            address.setAddressType("Casa");
+            address.setCity("Tubarão");
+            address.setPostalCode("88703-656");
+            address.setNeighborhood("Sertão");
+            address.setNumber("102B");
+            address.setResidenceType(ResidenceType.House);
+            address.setUser(user);
+            address.setComplement("Ao lado de ");
+            address.setState("Sc");
+            address.setStreet("João bissoni");
 
             System.out.println("Running.");
         };

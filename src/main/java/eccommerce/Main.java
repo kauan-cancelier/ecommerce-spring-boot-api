@@ -2,22 +2,18 @@ package eccommerce;
 
 import com.fasterxml.jackson.datatype.hibernate5.jakarta.Hibernate5JakartaModule;
 import eccommerce.models.*;
+import eccommerce.models.enums.OrderStatus;
 import eccommerce.models.enums.ResidenceType;
+import eccommerce.models.enums.SendType;
 import eccommerce.services.*;
-import eccommerce.services.impl.ProductService;
-import eccommerce.services.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import javax.sql.DataSource;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 public class Main {
@@ -45,6 +41,12 @@ public class Main {
 
     @Autowired
     private AbstractCartItemService cartItemService;
+
+    @Autowired
+    private AbstractOrderService orderService;
+
+    @Autowired
+    private AbstractAddressService addressService;
 
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
@@ -102,6 +104,20 @@ public class Main {
             address.setComplement("Ao lado de ");
             address.setState("Sc");
             address.setStreet("João bissoni");
+            addressService.save(address);
+
+            Order order = new Order();
+            order.setNumber("NF45134");
+            order.setUser(user);
+            order.setShippingAddress(address);
+            order.setTrackingNumber("1235644GJ2A");
+            order.setShoppingCart(shoppingCart);
+            order.setStatus(OrderStatus.NEW);
+            order.setSendType(SendType.CORREIOS);
+            order.setObservations("Entregar antes das 18 horas");
+            order.setDiscount(BigDecimal.valueOf(5));
+            order.setOrderDate(LocalDateTime.now());
+            orderService.save(order);
 
             System.out.println("Running.");
         };

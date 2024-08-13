@@ -33,10 +33,4 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "createdAt", nullable = false)
-    private LocalDateTime createdAt;
-
-    @Column(name = "updatedAt", nullable = false)
-    private LocalDateTime updatedAt;
-
 }

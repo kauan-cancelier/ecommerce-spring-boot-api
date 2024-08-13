@@ -9,7 +9,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
@@ -31,7 +30,7 @@ public class Order {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "shopping_cart_id", nullable = false, unique = true)
+    @JoinColumn(name = "shopping_cart_id", nullable = false)
     private ShoppingCart shoppingCart;
 
     @Enumerated(EnumType.STRING)
@@ -44,13 +43,10 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "address_id")
-    private Address shippingAddress;
+    private Address address;
 
     @Column(name = "tracking_number", nullable = false)
     private String trackingNumber;
-
-    @Column(name = "order_date", nullable = false)
-    private LocalDateTime orderDate;
 
     @Column(name = "observations")
     private String observations;

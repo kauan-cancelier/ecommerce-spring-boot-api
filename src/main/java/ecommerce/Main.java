@@ -13,7 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class Main {
@@ -55,8 +54,6 @@ public class Main {
             user.setName("Kauan");
             user.setEmail("kauan@gmail.com");
             user.setPassword("12345678");
-            user.setCreatedAt(LocalDateTime.now());
-            user.setUpdatedAt(LocalDateTime.now());
             user.setRole("client");
             userService.save(user);
 
@@ -109,14 +106,13 @@ public class Main {
             Order order = new Order();
             order.setNumber("NF45134");
             order.setUser(user);
-            order.setShippingAddress(address);
+            order.setAddress(address);
             order.setTrackingNumber("1235644GJ2A");
             order.setShoppingCart(shoppingCart);
             order.setStatus(OrderStatus.NEW);
             order.setSendType(SendType.CORREIOS);
             order.setObservations("Entregar antes das 18 horas");
             order.setDiscount(BigDecimal.valueOf(5));
-            order.setOrderDate(LocalDateTime.now());
             orderService.save(order);
 
             System.out.println("Running.");

@@ -7,6 +7,7 @@ import ecommerce.services.AbstractUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,8 +18,8 @@ public class UserService implements AbstractUserService {
 
     @Override
     public User save(User user) {
-        Preconditions.checkNotNull(user, "The users is required");
-        return repository.save(user);
+        Preconditions.checkNotNull(user, "The user is required");
+        return repository.saveAndFlush(user);
     }
 
     @Override

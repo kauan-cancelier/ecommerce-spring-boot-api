@@ -22,6 +22,13 @@ public class UserService implements AbstractUserService {
         return repository.saveAndFlush(user);
     }
 
+    public User login(String email, String password) {
+        System.out.println("Senha: " + password + " email: " + email);
+        User user = repository.login(email, password);
+        Preconditions.checkNotNull(user, "Email or password invalid");
+        return user;
+    }
+
     @Override
     public User deleteBy(Long id) {
         Preconditions.checkNotNull(id, "The user id is required");

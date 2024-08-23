@@ -1,6 +1,7 @@
 package ecommerce.services.impl;
 
 import com.google.common.base.Preconditions;
+import ecommerce.models.Category;
 import ecommerce.models.Product;
 import ecommerce.repositories.ProductRepository;
 import ecommerce.services.AbstractProductService;
@@ -40,5 +41,10 @@ public class ProductService implements AbstractProductService {
     @Override
     public List<Product> listAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<Product> listBy(Category category) {
+        return repository.listBy(category);
     }
 }

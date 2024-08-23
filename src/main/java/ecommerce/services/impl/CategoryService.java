@@ -38,6 +38,14 @@ public class CategoryService implements AbstractCategoryService  {
     }
 
     @Override
+    public Category getBy(String name) {
+        Preconditions.checkNotNull(name, "The category name is required");
+        Category category = repository.findBy(name);
+        Preconditions.checkNotNull(category, "No category found for this name");
+        return category;
+    }
+
+    @Override
     public List<Category> listAll() {
         return repository.findAll();
     }

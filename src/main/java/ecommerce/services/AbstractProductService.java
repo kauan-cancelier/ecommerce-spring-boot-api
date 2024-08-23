@@ -1,5 +1,6 @@
 package ecommerce.services;
 
+import ecommerce.models.Category;
 import ecommerce.models.Product;
 import org.springframework.validation.annotation.Validated;
 
@@ -15,5 +16,7 @@ public interface AbstractProductService {
     public Product getBy(Long id);
 
     public List<Product> listAll();
+
+    public List<Product> listBy(Category category);
 
 }

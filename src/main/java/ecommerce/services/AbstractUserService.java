@@ -10,6 +10,8 @@ public interface AbstractUserService {
 
     public User save(User user);
 
+    public User login(String email, String password);
+
     public User deleteBy(Long id);
 
     public User getBy(Long id);

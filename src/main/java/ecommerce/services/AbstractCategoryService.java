@@ -14,6 +14,8 @@ public interface AbstractCategoryService {
 
     public Category getBy(Long id);
 
+    public Category getBy(String name);
+
     public List<Category> listAll();
 
 }

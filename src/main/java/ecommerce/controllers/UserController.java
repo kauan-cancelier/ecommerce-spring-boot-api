@@ -28,6 +28,16 @@ public class UserController {
         }
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User user) {
+        try {
+            User loggeduser = service.login(user.getEmail(), user.getPassword());
+            return ResponseEntity.ok(loggeduser);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/{id}")
     public  ResponseEntity<?> deleteBy(@PathVariable("id") Long id) {
         try {

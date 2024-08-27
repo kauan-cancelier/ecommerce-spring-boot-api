@@ -5,6 +5,7 @@ import ecommerce.models.User;
 import ecommerce.repositories.UserRepository;
 import ecommerce.services.AbstractUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,12 +19,19 @@ public class UserService implements AbstractUserService {
 
     @Override
     public User save(User user) {
-        Preconditions.checkNotNull(user, "The user is required");
-        return repository.saveAndFlush(user);
+        Preconditions.checkNotNull(user, "The user is required. ");
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if(user.isPersisted()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            return repository.save(user);
+        }
+        Preconditions.checkArgument(repository.findBy(user.getEmail()) == null,
+                "This email: '" + user.getEmail() +"' is already in use. ");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return repository.save(user);
     }
 
     public User login(String email, String password) {
-        System.out.println("Senha: " + password + " email: " + email);
         User user = repository.login(email, password);
         Preconditions.checkNotNull(user, "Email or password invalid");
         return user;

@@ -14,6 +14,8 @@ public interface AbstractRoleService {
 
     public Role getBy(Long id);
 
+    public Role getBy(String name);
+
     public List<Role> listAll();
 
 }

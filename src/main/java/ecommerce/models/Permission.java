@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@Table(name = "permissions")
 @Entity
-@Table(name = "users")
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Permission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,16 +25,5 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
-
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
-
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @Transient
-    public boolean isPersisted() {
-        return getId() != null && getId() > 0;
-    }
 
 }

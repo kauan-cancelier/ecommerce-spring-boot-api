@@ -32,8 +32,17 @@ public class UserService implements AbstractUserService {
     }
 
     public User login(String email, String password) {
-        User user = repository.login(email, password);
-        Preconditions.checkNotNull(user, "Email or password invalid");
+        Preconditions.checkArgument(!email.isBlank(), "The email is required.");
+        Preconditions.checkArgument(!password.isBlank(), "The password is required.");
+
+        User user = repository.findBy(email);
+        Preconditions.checkNotNull(user, "Invalid email or password.");
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new IllegalArgumentException("Invalid email or password.");
+        }
+
         return user;
     }
 

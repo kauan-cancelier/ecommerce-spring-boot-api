@@ -38,6 +38,14 @@ public class RoleService implements AbstractRoleService {
     }
 
     @Override
+    public Role getBy(String name) {
+        Preconditions.checkNotNull(name, "The name is required to find by name");
+        Role role = repository.findBy(name);
+        Preconditions.checkNotNull(role, "No role found for name: " + name);
+        return role;
+    }
+
+    @Override
     public List<Role> listAll() {
         return repository.findAll();
     }

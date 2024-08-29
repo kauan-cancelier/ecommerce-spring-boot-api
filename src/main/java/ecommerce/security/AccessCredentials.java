@@ -1,10 +1,15 @@
 package ecommerce.security;
 
+import ecommerce.models.Permission;
 import ecommerce.models.Role;
 import ecommerce.models.User;
+import ecommerce.services.AbstractCategoryService;
+import ecommerce.services.AbstractPermissionService;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,11 +33,14 @@ public class AccessCredentials implements UserDetails {
 
 	private List<GrantedAuthority> permissions;
 
-	public AccessCredentials(User user, Role role) {
+
+	public AccessCredentials(User user, List<Permission> permissions) {
 		this.login = user.getEmail();
 		this.pass = user.getPassword();
 		this.permissions = new ArrayList<GrantedAuthority>();
-		this.permissions.add(new SimpleGrantedAuthority(role.getName()));
+		for (Permission p : permissions) {
+			this.permissions.add(new SimpleGrantedAuthority(p.getName()));
+		}
 	}
 
 	@Override

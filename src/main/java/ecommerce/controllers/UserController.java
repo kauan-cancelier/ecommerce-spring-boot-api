@@ -1,7 +1,7 @@
 package ecommerce.controllers;
 
 import com.google.common.base.Preconditions;
-import ecommerce.dto.UserDTO;
+import ecommerce.dto.UserDto;
 import ecommerce.models.User;
 import ecommerce.services.AbstractUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +28,11 @@ public class UserController {
         }
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
-        try {
-            User loggeduser = service.login(user.getEmail(), user.getPassword());
-            return ResponseEntity.ok(loggeduser);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
     @DeleteMapping("/{id}")
     public  ResponseEntity<?> deleteBy(@PathVariable("id") Long id) {
         try {
             User user = service.deleteBy(id);
-            UserDTO transferUser = UserDTO.fromEntity(user);
+            UserDto transferUser = UserDto.fromEntity(user);
             return ResponseEntity.ok(transferUser);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -64,7 +54,7 @@ public class UserController {
     public ResponseEntity<?> findBy(@PathVariable("id") Long id) {
         try {
             User user = service.getBy(id);
-            UserDTO transferUser = UserDTO.fromEntity(user);
+            UserDto transferUser = UserDto.fromEntity(user);
             return ResponseEntity.ok(transferUser);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -75,7 +65,7 @@ public class UserController {
     public ResponseEntity<?> listAll() {
         try {
             List<User> users = service.listAll();
-            List<UserDTO> transferUsers = UserDTO.fromListEntity(users);
+            List<UserDto> transferUsers = UserDto.fromListEntity(users);
             return ResponseEntity.ok(transferUsers);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

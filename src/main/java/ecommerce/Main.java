@@ -1,6 +1,10 @@
 package ecommerce;
 
 import com.fasterxml.jackson.datatype.hibernate5.jakarta.Hibernate5JakartaModule;
+import ecommerce.services.AbstractPermissionService;
+import ecommerce.services.AbstractRoleService;
+import ecommerce.services.AbstractUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +22,16 @@ public class Main {
     public Hibernate5JakartaModule jsonHibernate5Module() {
         return new Hibernate5JakartaModule();
     }
+
+    @Autowired
+    private AbstractUserService userService;
+
+    @Autowired
+    private AbstractRoleService roleService;
+
+    @Autowired
+    private AbstractPermissionService permissionService;
+
 
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
